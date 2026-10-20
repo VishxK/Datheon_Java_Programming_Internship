@@ -103,4 +103,33 @@ public class GradeManager {
         return null;
     }
 
+    public static void recordStudentMarks() {
+        if (studentCohort.isEmpty()) {
+            System.out.println("No students registered yet.");
+            return;
+        }
+
+        int id = getIntInput("Enter Student ID: ");
+        Student student = findStudentById(id);
+
+        if (student == null) {
+            System.out.println("Student not found.");
+            return;
+        }
+
+        System.out.print("Enter Course Name: ");
+        String course = scanner.nextLine().trim();
+
+        System.out.print("Enter Score (0 - 100): ");
+        try {
+            float score = Float.parseFloat(scanner.nextLine());
+            student.setGrade(course, score);
+            System.out.println("Marks recorded successfully for " + student.getName());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter a valid numerical score.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 }
