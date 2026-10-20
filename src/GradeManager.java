@@ -66,4 +66,41 @@ public class GradeManager {
         }
     }
 
+
+    private static void addStudent() {
+        System.out.print("Enter Student ID: ");
+
+        // Validate that the input is an integer
+        if(!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a valid integer for Student ID.");
+            scanner.nextLine(); // Clear the invalid input
+            return;
+        }
+
+        int id = (Integer.parseInt(scanner.nextLine().trim()));
+
+        // Check if ID already exists
+        for (Student s : studentCohort) {
+            if (s.getId() == id) {
+                System.out.println("Error: A student with ID " + id + " already exists.");
+                return;
+            }
+        }
+
+        System.out.print("Enter Student Name: ");
+        String name = scanner.nextLine().trim();
+
+        studentCohort.add(new Student(id, name));
+        System.out.println("Student successfully registered!");
+    }
+
+    private static Student findStudentById(int id) {
+        for (Student s : studentCohort) {
+            if (s.getId() == id) {
+                return s;
+            }
+        }
+        return null;
+    }
+
 }
