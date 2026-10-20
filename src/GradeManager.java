@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class GradeManager {
     private static ArrayList<Student> studentCohort = new ArrayList<>();
@@ -130,6 +129,70 @@ public class GradeManager {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public static void computeClassmetrics() {
+        if (studentCohort.isEmpty()) {
+            System.out.println("No student records available to compute metrics.");
+            return;
+        }
+
+        List<Float> allScores = new ArrayList<>();
+        for (Student student : studentCohort) {
+            allScores.addAll(student.getGrade().values());
+        }
+
+        if (allScores.isEmpty()) {
+            System.out.println("No grades recorded across any students yet.");
+            return;
+        }
+
+        float sum = 0;
+        for (float score : allScores) {
+            sum += score;
+        }
+        float classAverage = sum / allScores.size();
+
+        // Compute Median
+        Collections.sort(allScores);
+        float median;
+        int size = allScores.size();
+        if (size % 2 == 0) {
+            median = (allScores.get(size / 2 - 1) + allScores.get(size / 2)) / 2.0f;
+        } else {
+            median = allScores.get(size / 2);
+        }
+
+        System.out.println("\n--- Class Academic Metrics ---");
+        System.out.printf("Total Recorded Scores: %d\n", size);
+        System.out.printf("Class Average Score:   %.2f\n", classAverage);
+        System.out.printf("Class Median Score:    %.2f\n", median);
+    }
+
+
+    private static void generateReportCards() {
+        if (studentCohort.isEmpty()) {
+            System.out.println("No students registered.");
+            return;
+        }
+
+        System.out.printf("%-10s | %-20s | %-10s | %-8s\n", "ID", "Name", "GPA", "Courses");
+        System.out.println("--------------------------------------------------------");
+
+        for (Student student : studentCohort) {
+            System.out.printf("%-10d | %-20s | %-10.2f | %-8d\n",
+                    student.getId(),
+                    student.getName(),
+                    student.calculateGPA(),
+                    student.getGrade().size());
+
+            if (!student.getGrade().isEmpty()) {
+                for (Map.Entry<String, Float> entry : student.getGrade().entrySet()) {
+                    System.out.printf("   -> Course: %-15s | Score: %.2f\n", entry.getKey(), entry.getValue());
+                }
+            }
+        }
+        System.out.println("--------------------------------------------------------");
     }
 
 }
