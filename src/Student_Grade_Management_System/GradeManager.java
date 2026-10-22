@@ -1,3 +1,5 @@
+package Student_Grade_Management_System;
+
 import java.util.*;
 
 public class GradeManager {
@@ -70,7 +72,7 @@ public class GradeManager {
         System.out.print("Enter Student ID: ");
 
         // Validate that the input is an integer
-        if(!scanner.hasNextInt()) {
+        if (!scanner.hasNextInt()) {
             System.out.println("Invalid input. Please enter a valid integer for Student ID.");
             scanner.nextLine(); // Clear the invalid input
             return;
