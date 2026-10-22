@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    private LocalDateTime timestamp;
-    private String type;
-    private double amount;
-    private double resultingBalance;
+    private final LocalDateTime timestamp;
+    private final String type;
+    private final double amount;
+    private final double resultingBalance;
 
     public Transaction(String type, double amount, double resultingBalance) {
         this.timestamp = LocalDateTime.now();
