@@ -19,7 +19,7 @@ public class Transaction {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return String.format("[%s] TYPE: %-12s | AMOUNT: $%-9.2f | BALANCE: $%.2f",
+        return String.format("[%s] TYPE: %-12s | AMOUNT: %-9.2f | BALANCE: %.2f",
                 timestamp.format(formatter), type, amount, resultingBalance);
     }
 }
