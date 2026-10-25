@@ -9,6 +9,7 @@ public class ATM {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        initializeSampleData();
 
         boolean running = true;
         while (running) {
@@ -47,12 +48,12 @@ public class ATM {
     }
 
     private static void initializeSampleData() {
-        Customer c1 = new Customer("C001", "Kasun Perera", "1234");
+        Customer c1 = new Customer("001", "Kasun Perera", "1234");
         c1.addAccount(new SavingsAccount("SAV-1001", 500.00));
         c1.addAccount(new CheckingAccount("CHK-1001", 300.00, 150.00));
         bankCustomers.add(c1);
 
-        Customer c2 = new Customer("C002", "Vishwa Omalka", "5678");
+        Customer c2 = new Customer("002", "Vishwa Omalka", "5678");
         c2.addAccount(new SavingsAccount("SAV-1002", 1250.00));
         bankCustomers.add(c2);
     }
